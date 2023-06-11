@@ -1,13 +1,15 @@
 var path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 console.log('Current Entry:' + path.resolve(process.cwd(), "src", "index.js"));
+const isDev = process.env.NODE_ENV === 'development';
 module.exports = {
+  devtool: isDev ? "inline-source-map" : false,
   entry: path.resolve(process.cwd(), "src", "index.js"),
   output: {
     path: path.resolve(process.cwd(), "dist"),
     filename: 'static/js/[name].[contenthash:8].js',
     clean: true, // clear the last packaging content;
-    publicPath: './',
+    publicPath: "/",
   },
   mode: process.env.NODE_ENV,
   module: {
@@ -83,8 +85,10 @@ module.exports = {
     host: "localhost",
     port: 8080,
     open: true,
-    static: {
-      directory: path.resolve(process.cwd(), "dist"),
-    },
+    hot: true,
+    // static: {
+    //   directory: path.resolve(process.cwd(), "dist"),
+    // },
+    static: "./public", //指向静态文件
   },
 };
