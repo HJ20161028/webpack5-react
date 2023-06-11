@@ -39,7 +39,7 @@ const EditForm = () => {
   };
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button className='edit-entry' type="primary" onClick={showModal}>
         Open Edit Form
       </Button>
       <Modal

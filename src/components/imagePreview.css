@@ -1,0 +1,11 @@
+.image-root .master{
+  width: 800px;
+  margin: 24px;
+}
+
+.background-img{
+  background-image: url('../assets/images/dapingshan.jpg');
+  width: 800px;
+  height: 500px;
+  margin-left: 24px;
+}

@@ -55,15 +55,16 @@ module.exports = {
           3、asset/source 带出资源的源代码
           4、asset 根据设置导出url还是转成base64格式嵌入到代码中
         */
-        type: "asset",
-        parser: {
-          dataUrlCondition: {
-            maxSize: 650 * 1024, // 小于650kb转base64 (正常情况下10kb左右下的会转成base64)
-          }
-        },
+        // type: "asset",
+        // parser: {
+        //   dataUrlCondition: {
+        //     maxSize: 650 * 1024, // 小于650kb转base64 (正常情况下10kb左右下的会转成base64)
+        //   }
+        // },
         generator: {
           filename: 'static/images/[name].[contenthash:8].[ext]', // 文件输出目录和命名
         },
+        type: 'asset/resource',
       }
     ],
   },
@@ -89,6 +90,6 @@ module.exports = {
     // static: {
     //   directory: path.resolve(process.cwd(), "dist"),
     // },
-    static: "./public", //指向静态文件
+    static: "./src", //指向静态文件
   },
 };
