@@ -1,5 +1,7 @@
 var path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 console.log('Current Entry:' + path.resolve(process.cwd(), "src", "index.js"));
 const isDev = process.env.NODE_ENV === 'development';
 module.exports = {
@@ -7,7 +9,7 @@ module.exports = {
   entry: path.resolve(process.cwd(), "src", "index.js"),
   output: {
     path: path.resolve(process.cwd(), "dist"),
-    filename: 'static/js/[name].[contenthash:8].js',
+    filename: 'js/[name].[contenthash:8].js',
     clean: true, // clear the last packaging content;
     publicPath: "/",
   },
@@ -36,14 +38,13 @@ module.exports = {
         exclude: /node_modules/, // 一般依赖已经经过转换，所以排除安装的依赖包，只转换我们自己的代码提高速度。
       },
       {
-        test: /\.css$/,
+        test: /\.(sa|sc|c)ss$/i,
         use: [
-          {
-            loader: "style-loader",
-          },
-          {
-            loader: "css-loader",
-          },
+          MiniCssExtractPlugin.loader,
+          // 将 CSS 转化成 CommonJS 模块
+          'css-loader',
+          // 将 Sass 编译成 CSS
+          'sass-loader',
         ],
       },
       {
@@ -62,7 +63,7 @@ module.exports = {
         //   }
         // },
         generator: {
-          filename: 'static/images/[name].[contenthash:8].[ext]', // 文件输出目录和命名
+          filename: 'images/[name].[contenthash:8].[ext]', // 文件输出目录和命名
         },
         type: 'asset/resource',
       }
@@ -78,6 +79,9 @@ module.exports = {
         "theme-color": "#4285f4",
       },
     }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash:8].css',
+    })
   ],
   resolve: {
     extensions: ['.js', '.jsx','.json'],

@@ -1,6 +1,6 @@
 import { Button, Modal, Input, Select, message } from 'antd';
 import React, { useState } from 'react';
-import './editForm.css';
+import './editForm.scss';
 
 const EditForm = () => {
   const [loading, setLoading] = useState(false);
